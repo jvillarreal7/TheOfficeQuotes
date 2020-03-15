@@ -27,8 +27,11 @@ class Quote(AbstractModel):
 
 class Character(AbstractModel):
     """Model that represents a character from the show."""
+    actor = models.ForeignKey("Actor", on_delete=models.CASCADE)
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    picture = models.ImageField(upload_to='characters/', default=None)
 
 
 class Season(AbstractModel):
@@ -45,6 +48,12 @@ class Episode(AbstractModel):
 
     number = models.PositiveIntegerField()
     air_date = models.DateTimeField(default=None)
+
+
+class Actor(AbstractModel):
+    """Models that represents any actor from the show."""
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
 
 
 class StaffMember(AbstractModel):
