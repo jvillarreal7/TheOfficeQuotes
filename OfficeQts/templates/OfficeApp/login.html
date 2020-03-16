@@ -1,0 +1,56 @@
+{% extends 'base-admin.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>{{message}}</p>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <form action="/login-dashboard/" method="POST" id="login">
+                    {% csrf_token %}
+                    <input type="hidden" name="recaptcha" id="recaptcha">
+                    <p class="h4 mb-4">Sign in</p>
+                    <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username"
+                        required>
+                    <input type="password" id="password" name="password" class="form-control mb-4"
+                        placeholder="Password" required>
+                    <!-- <div class="row">
+                        <div class="col-md-12 text-center">
+                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                            <div style="text-align: center;">
+                                <div class="g-recaptcha" data-sitekey="6LddfeEUAAAAACov1Dhxkcdm_knwBbh-cAgxwZ8W"
+                                    style="display: inline-block;"></div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+<script>
+    grecaptcha.ready(function () {
+        $('#login').submit(function (e) {
+            var form = this;
+            e.preventDefault();
+            grecaptcha.execute('{{site_key}}', {
+                action: 'login'
+            }).then(function (token) {
+                console.log(token);
+                $('#recaptcha').val(token);
+                form.submit();
+            });
+        });
+    });
+</script>
+
+{% endblock %}

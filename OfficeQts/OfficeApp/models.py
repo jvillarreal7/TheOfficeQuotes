@@ -52,9 +52,9 @@ class Season(AbstractModel):
 class Episode(AbstractModel):
     """Model that represents an episode of the show."""
     written_by = models.ForeignKey(
-        "StaffMember", default=None, on_delete=models.CASCADE, related_name='episodes')
+        "StaffMember", default=None, on_delete=models.CASCADE, related_name='episodes_w')
     directed_by = models.ForeignKey(
-        "StaffMember", default=None, on_delete=models.CASCADE)
+        "StaffMember", default=None, on_delete=models.CASCADE, related_name='episodes_d')
 
     number = models.PositiveIntegerField()
     air_date = models.DateTimeField(default=None)

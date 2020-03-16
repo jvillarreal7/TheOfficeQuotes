@@ -122,3 +122,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'OfficeApp.User'
+
+RECAPTCHA_SITE_KEY = "6LddfeEUAAAAACov1Dhxkcdm_knwBbh-cAgxwZ8W"
+RECAPTCHA_SECRET_KEY = "6LddfeEUAAAAAGBPiu4DAUi-TrxqCYi0Hsjl-6wx"
