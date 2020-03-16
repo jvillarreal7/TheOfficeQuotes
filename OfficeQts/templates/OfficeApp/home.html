@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block content %}
 
@@ -17,7 +18,7 @@
 </head>
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-6">
         <div class="card quoteCard">
             {% if random_quote %}
             <div class="card-body quoteBody mx-auto">
@@ -36,8 +37,76 @@
                             {{random_quote.character.last_name}}</h5>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="padding-bottom: 0%;">
+                        <p>(Season {{random_quote.episode.season.number}}, Episode
+                            {{random_quote.episode.number}}: {{random_quote.episode.title}})</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card-body mx-auto">
+                <p>Oops! A random quote could not be generated. Try again later.</p>
             </div>
             {% endif %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="quoteChar">Trivia</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>
+                        <h5>This episode aired in <b>{{random_quote.episode.air_date}}</b>.</h5>
+                    </li>
+                    <li>
+                        <h5>
+                            This is the {{episode_counter|ordinal}}{% if directed_episodes_total < 2 %} and
+                            only{% endif %}
+                            episode directed by
+                            <b>{{random_quote.episode.directed_by.first_name}}
+                                {{random_quote.episode.directed_by.last_name}}</b>{% if directed_episodes_total > 1 %},
+                            who
+                            ended up
+                            directing {{directed_episodes_total}} episodes in total.{% else %}.{% endif %}
+                        </h5>
+                    </li>
+                    <li>
+                        <h5>
+                            This episode's running time is <b>{{random_quote.episode.running_time}} minutes</b>. The
+                            average
+                            episode in the series runs for <b>{{running_time_avg}} minutes</b> approximately.
+                        </h5>
+                    </li>
+                    {% if running_time_sf > 0 %}
+                    <li>
+                        <h5>
+                            If you've been watching from the beginning up until the start of this episode, you'd be
+                            approximately <b>{{running_time_sf}} minutes</b> in.
+                            That's about <b>{{running_time_sf_hours|intcomma}} hours</b>!
+                            {% if random_quote.episode.season.number >= 1 and random_quote.episode.season.number <= 3 %}
+                            But it's not that impressive is it?
+                            {% elif random_quote.episode.season.number >= 4 and random_quote.episode.season.number <= 6 %}
+                            Now we're talking numbers.
+                            {% else %}
+                            Whoa! Time well spent, huh?
+                            {% endif %}
+                        </h5>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <h5>
+                            If you were to binge The Office while aboard the International Space Station you'd have
+                            completed <b>{{iss_around_earth}} orbits</b> around the Earth.
+                            {% if running_time_sf < 1 %}
+                            Better get started!
+                            {% endif %}
+                        </h5>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

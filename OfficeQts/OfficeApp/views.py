@@ -11,8 +11,36 @@ def Home(request):
     count = Quote.objects.count()
     if count > 0:
         random_quote = Quote.objects.all()[randint(0, count - 1)]
+
+    # Trivia: Directed episodes
+    directed_episodes_total = Episode.objects.filter(
+        directed_by_id=random_quote.episode.directed_by_id).order_by('air_date')
+
+    directed_episodes_by_date = Episode.objects.filter(
+        directed_by_id=random_quote.episode.directed_by_id, air_date__lte=random_quote.episode.air_date)
+
+    episodes_sf = Episode.objects.filter(
+        air_date__lt=random_quote.episode.air_date)
+
+    running_time_sf = 0
+    running_time_sf_hours = 0
+
+    for e in episodes_sf:
+        running_time_sf += e.running_time
+
+    if running_time_sf > 0:
+        running_time_sf_hours = running_time_sf / 60
+
+    iss_around_earth = running_time_sf / 92
+
     return render(request, "OfficeApp/home.html", {
-        'random_quote': random_quote
+        'random_quote': random_quote,
+        'episode_counter': len(directed_episodes_by_date),
+        'directed_episodes_total': len(directed_episodes_total),
+        'running_time_sf': running_time_sf,
+        'running_time_sf_hours': round(running_time_sf_hours, 2),
+        'running_time_avg': 27.15,
+        'iss_around_earth': round(iss_around_earth, 2),
     })
 
 
