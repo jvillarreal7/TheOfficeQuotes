@@ -2,15 +2,42 @@
 
 {% block content %}
 
+<head>
+    <style>
+        .quoteBody {
+            background-image: url('{{random_quote.character.picture.url}}');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 0;
+            padding-top: 53%;
+            background-position: center center;
+        }
+    </style>
+</head>
+
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h2>Random quote</h2>
+    <div class="col-md-8 offset-md-2">
+        <div class="card quoteCard">
+            {% if random_quote %}
+            <div class="card-body quoteBody mx-auto">
+
             </div>
-            <div class="card-body">
-                <p>Random quote content goes here.</p>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h5 class="quoteText">{{random_quote.content}}
+                        </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h5 class="quoteChar">{{random_quote.character.first_name}}
+                            {{random_quote.character.last_name}}</h5>
+                    </div>
+                </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

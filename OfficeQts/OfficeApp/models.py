@@ -10,7 +10,7 @@ class User(AbstractUser):
 
 class AbstractModel(models.Model):
     """General attributes that consequent models will have as well."""
-    created_by = models.PositiveIntegerField(default=None)
+    created_by = models.PositiveIntegerField(default=1)
     created_date = models.DateTimeField(default=timezone.now)
     modified_by = models.PositiveIntegerField(
         default=None, blank=True, null=True)
@@ -24,7 +24,6 @@ class AbstractModel(models.Model):
 class Quote(AbstractModel):
     """Model that represents a quote from the show."""
     character = models.ForeignKey("Character", on_delete=models.CASCADE)
-    season = models.ForeignKey("Season", on_delete=models.CASCADE)
     episode = models.ForeignKey("Episode", on_delete=models.CASCADE)
 
     content = models.CharField(max_length=999)
@@ -70,13 +69,13 @@ class Episode(AbstractModel):
         "StaffMember", default=None, null=True, blank=True, on_delete=models.CASCADE, related_name='episodes_w')
     season = models.ForeignKey("Season", on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     number = models.PositiveIntegerField()
     air_date = models.DateField(default=None)
     running_time = models.PositiveIntegerField()
 
     def __str__(self):
-        return "Season " + str(self.season.number) + " / " + "Episode " + str(self.number) + ": " + self.name
+        return "Season " + str(self.season.number) + " / " + "Episode " + str(self.number) + ": " + self.title
 
 
 class StaffMember(AbstractModel):

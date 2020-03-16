@@ -121,6 +121,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 AUTH_USER_MODEL = 'OfficeApp.User'
 
 RECAPTCHA_SITE_KEY = "6LddfeEUAAAAACov1Dhxkcdm_knwBbh-cAgxwZ8W"

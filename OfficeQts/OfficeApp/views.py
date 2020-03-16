@@ -2,11 +2,18 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from random import randint
+from .models import *
 import requests
 
 
 def Home(request):
-    return render(request, "OfficeApp/home.html")
+    count = Quote.objects.count()
+    if count > 0:
+        random_quote = Quote.objects.all()[randint(0, count - 1)]
+    return render(request, "OfficeApp/home.html", {
+        'random_quote': random_quote
+    })
 
 
 def LoginAdmin(request):
