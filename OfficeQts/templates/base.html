@@ -1,4 +1,5 @@
 {% load static %}
+<html>
 
 <head>
     <title>The Office Quotes</title>
@@ -27,11 +28,87 @@
 </head>
 
 <body style="background-image: url('{% static "img/paper.png" %}');">
-    <!--Navbar -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color">
-        <a class="navbar-brand" href="#">The Office Quotes</a>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">The Office Quotes</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        {% if request.path == '/' %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotes
+                        {% if request.path == '/quotes/' %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About
+                        {% if request.path == '/about/' %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Me
+                        {% if request.path == '/contact-me/' %}
+                        <span class="sr-only">(current)</span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
-    <!--/.Navbar -->
+    <!-- Links -->
+    <!-- <div class="collapse navbar-collapse" id="basicExampleNav">
+        <a class="navbar-brand" href="#">The Office Quotes</a>
+        <ul class="navbar-nav mr-auto ml-2">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home
+                    {% if request.path == '/' %}
+                    <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Quotes
+                    {% if request.path == '/quotes' %}
+                    <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About
+                    {% if request.path == '/about' %}
+                    <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Me
+                    {% if request.path == '/contact-me' %}
+                    <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+    </div> -->
 
     <div class="container-fluid">
         <div class="row mt-3">
@@ -40,3 +117,43 @@
         {% endblock %}
     </div>
 </body>
+
+
+<footer class="page-footer font-small blue pt-4 mt-3">
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase">The Office Quotes</h5>
+                <p>All content from the series is property of their respective owners.</p>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-md-3 mb-md-0 mb-3">
+
+            </div>
+
+            <div class="col-md-3 mb-md-0 mb-3">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="#!">Quotes</a>
+                    </li>
+                    <li>
+                        <a href="#!">About</a>
+                    </li>
+                    <li>
+                        <a href="#!">Contact Me</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-copyright text-center py-3">Site made by:
+        <a href="https://github.com/jvillarreal7"> <i class="fab fa-github"></i> Jaime Villarreal</a>
+    </div>
+</footer>
+
+</html>
